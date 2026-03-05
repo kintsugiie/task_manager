@@ -14,6 +14,11 @@ def cli():
 
 
 @cli.command()
+def list():
+    """Показать все задачи"""
+    click.echo("Список задач (пока пусто)")
+
+
 @click.argument('title')
 def add(title):
     """Добавить задачу"""
