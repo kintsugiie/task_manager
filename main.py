@@ -12,10 +12,19 @@ def cli():
     """Менеджер задач"""
     pass
 
+
 @cli.command()
-def list():
-    """Показать все задачи"""
-    click.echo("Список задач (пока пусто)")
+@click.argument('title')
+def add(title):
+    """Добавить задачу"""
+    from utils import load_tasks, save_tasks
+
+    tasks = load_tasks()
+    tasks.append({'title': title, 'done': False})
+    save_tasks(tasks)
+
+    console.print(f"[green]✅ Добавлена задача: {title}[/green]")
+
 
 if __name__ == "__main__":
     cli()
