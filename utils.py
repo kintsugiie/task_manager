@@ -8,5 +8,7 @@ def load_tasks():
             return json.load(f)
     return []
 
-
+def save_tasks(tasks):
+    with open(TASKS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(tasks, f, ensure_ascii=False, indent=2)
 
