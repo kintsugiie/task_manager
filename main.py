@@ -19,3 +19,25 @@ def list():
 
 if __name__ == "__main__":
     cli()
+
+
+@cli.command()
+def list():
+    """Показать все задачи"""
+    from utils import load_tasks
+
+    tasks = load_tasks()
+    if not tasks:
+        console.print("[yellow]Задач нет[/yellow]")
+        return
+
+    table = Table(title="Список задач")
+    table.add_column("ID")
+    table.add_column("Задача")
+    table.add_column("Статус")
+
+    for i, task in enumerate(tasks, 1):
+        status = "✅" if task.get('done') else "⏳"
+        table.add_row(str(i), task['title'], status)
+
+    console.print(table)
