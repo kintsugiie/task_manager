@@ -67,5 +67,20 @@ def complete(task_id):
         console.print(f"[red]❌ Задача {task_id} не найдена[/red]")
 
 
+@cli.command()
+@click.argument("task_id", type=int)
+def delete(task_id):
+    """Удалить задачу"""
+    tasks = load_tasks()
+
+    if not (1 <= task_id <= len(tasks)):
+        console.print(f"[red]❌ Задача {task_id} не найдена[/red]")
+        return
+
+    removed = tasks.pop(task_id - 1)
+    save_tasks(tasks)
+
+    console.print(f"[green]🗑 Удалена задача:[/green] {removed['title']}")
+
 if __name__ == "__main__":
     cli()
